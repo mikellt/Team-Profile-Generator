@@ -8,7 +8,7 @@ const internsCard = [];
 
 
 
-
+//ask about async and await
 async function managerEntry() {
     const answers = await inquirer
     .prompt([
@@ -127,7 +127,7 @@ function employeeEntry(){
             internEntry()
         } else {
             const htmlCreate = generateMarkdown(answers)
-            fs.writeFile("index.html", htmlCreate, (err) => err ? console.error(err) : console.log("success"))
+            fs.writeFile("./teamFile/team.html", htmlCreate, (err) => err ? console.error(err) : console.log("success"))
         }    
     })
 }
