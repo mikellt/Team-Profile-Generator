@@ -1,15 +1,17 @@
 const inquirer = require("inquirer");
 const fs = require('fs');
+const generateMarkdown = require("./utils/generateHTML");
+
+const managersCard = [];
+const engineersCard = [];
+const internsCard = [];
+
+
+
 
 async function managerEntry() {
     const answers = await inquirer
     .prompt([
-        {
-            type:"confirm",
-            message:"Manager Entry?",
-            value: "Manager",
-            name:"manager"
-        },
         {
             type: "input",
             message: "Manager Entry - Name:",
@@ -32,50 +34,14 @@ async function managerEntry() {
         }
     ])
     .then((answers)=>{
-        console.log(answers, "Entries saved");
+        console.log(answers, "Entry saved");
         employeeEntry()
     })
 };
 
-function employeeEntry(){
-    inquirer.prompt([
-        {
-        type: "list",
-        message: "Employee Entry - Select role",
-        name: "employeeEntry",
-        choices:
-            [{
-                name: "Engineer",
-                value: "Engineer"
-            },
-            {
-                name: "Intern",
-                value: "Intern"
-            },
-            {
-                name: "done",
-                value: "finish building my team"
-            }]
-        }
-    ])
-
-    .then((answers)=> {
-    if(answers.employeeEntry === "Engineer"){
-        engineerEntry();
-    } else if (answers.employeeEntry === "Intern"){
-        internEntry();
-    } else console.log("Thank you, submission success")
-    })
-}
 
 function engineerEntry() {
     inquirer.prompt([
-        {
-            type:"confirm",
-            message:"Engineer Entry?",
-            value: "Engineer",
-            name:"engineer"
-        },
         {
             type: "input",
             message: "Engineer entry - Name:",
@@ -95,41 +61,17 @@ function engineerEntry() {
             type: "input",
             message: "Engineer entry - GitHub Username:",
             name: "engineerGitHub",
-        },
-        {
-            type: "list",
-            message: "Enter another employee?",
-            name: "anotherEntry",
-            choices: [
-                {
-                    name: "yes",
-                    value: "Yes"
-                },
-                {
-                    name: "no",
-                    value: "No"
-                }
-            ]
         }
     ])
     .then((answers)=>{
-        console.log(answers)
-        if(answers.anotherEntry === "Yes"){
-            employeeEntry();
-        }else {
-            console.log("Thank you, submission success")
-        }
+        console.log(answers, "Entry saved")
+        employeeEntry()
     })
+
 }
 
 function internEntry() {
     inquirer.prompt([
-        {
-            type:"default",
-            message:"Intern Entry?",
-            default: "Intern",
-            name:"intern"
-        },
         {
             type: "input",
             message: "intern entry - Name:",
@@ -149,30 +91,67 @@ function internEntry() {
             type: "input",
             message: "intern entry - school:",
             name: "internSchool",
-        },
-        {
-            type: "list",
-            message: "Enter another employee?",
-            name: "anotherEntry",
-            choices: [
-                {
-                    name: "yes",
-                    value: "Yes"
-                },
-                {
-                    name: "no",
-                    value: "No"
-                }
-            ]
         }
     ])
     .then((answers)=>{
         console.log(answers)
-        if(answers.anotherEntry === "Yes"){
-            employeeEntry();
-        }else console.log("Thank you, submission success")
+        employeeEntry()
     })
 }
 
+function employeeEntry(){
+    inquirer.prompt([
+        {
+        type: "list",
+        message: "Employee Entry: ",
+        name: "employeeEntry",
+        choices:
+            [{
+                name: "Engineer",
+                value: "Engineer"
+            },
+            {
+                name: "Intern",
+                value: "Intern"
+            },
+            {
+                name: "None, finish",
+                value: "None, finish"
+            }]
+        }
+    ])
+    .then((answers)=> {
+        if(answers.employeeEntry === "Engineer"){
+            engineerEntry()
+        } else if (answers.employeeEntry === "Intern"){
+            internEntry()
+        } else {
+            const htmlCreate = generateMarkdown(answers)
+            fs.writeFile("index.html", htmlCreate, (err) => err ? console.error(err) : console.log("success"))
+        }    
+    })
+}
 
 managerEntry()
+
+// require inquirer
+
+// Create an empty array list to store employee object
+
+// gather Manager data
+    // inquirer.prompt()
+    // THEN build a manager object
+
+    // Gather Engineer data
+    // inquirer.prompt()
+    // Then build an Engineer object
+    
+    // Gather Intern data
+    // inquirer.prompt()
+    // Then build an Intern object
+    
+    // ask which team to add or done
+    // inquirer.prompt()
+    // Then deciding which function the call
+    
+    // Generate the HTML and write it to a file
