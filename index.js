@@ -1,16 +1,18 @@
 const inquirer = require("inquirer");
 const fs = require('fs');
-const generateMarkdown = require("./utils/generateHTML");
+const employeeType = require("./utils/generateHTML");
+const Manager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
 
-const managersCard = [];
-const engineersCard = [];
-const internsCard = [];
+let managers = [];
+let engineers = [];
+let interns = [];
+let myTeam = [];
 
 
-
-//ask about async and await
-async function managerEntry() {
-    const answers = await inquirer
+function managerEntry() {
+    inquirer
     .prompt([
         {
             type: "input",
@@ -34,6 +36,8 @@ async function managerEntry() {
         }
     ])
     .then((answers)=>{
+        const newManager = new Manager(answers.managerName,answers.managerId,answers.managerEmail,answers.managerPhone);
+        managers.push(newManager);
         console.log(answers, "Entry saved");
         employeeEntry()
     })
@@ -64,6 +68,8 @@ function engineerEntry() {
         }
     ])
     .then((answers)=>{
+        const newEngineer = new Engineer(answers.engineerName,answers.engineerId,answers.engineerEmail,answers.engineerGitHub);
+        engineers.push(newEngineer);
         console.log(answers, "Entry saved")
         employeeEntry()
     })
@@ -94,6 +100,8 @@ function internEntry() {
         }
     ])
     .then((answers)=>{
+        const newIntern = new Intern(answers.internName,answers.internId,answers.internEmail,answers.internSchool);
+        interns.push(newIntern);
         console.log(answers)
         employeeEntry()
     })
@@ -126,8 +134,10 @@ function employeeEntry(){
         } else if (answers.employeeEntry === "Intern"){
             internEntry()
         } else {
-            const htmlCreate = generateMarkdown(answers)
-            fs.writeFile("./teamFile/team.html", htmlCreate, (err) => err ? console.error(err) : console.log("success"))
+            myTeam = [...managers,...engineers,...interns]
+            console.log(myTeam)
+            const htmlCreate = employeeType(myTeam)
+            fs.writeFile("./dist/team.html", htmlCreate, (err) => err ? console.error(err) : console.log("success"))
         }    
     })
 }
