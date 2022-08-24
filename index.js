@@ -38,7 +38,7 @@ function managerEntry() {
     .then((answers)=>{
         const newManager = new Manager(answers.managerName,answers.managerId,answers.managerEmail,answers.managerPhone);
         managers.push(newManager);
-        console.log(answers, "Entry saved");
+        console.log("Entry saved");
         employeeEntry()
     })
 };
@@ -70,7 +70,7 @@ function engineerEntry() {
     .then((answers)=>{
         const newEngineer = new Engineer(answers.engineerName,answers.engineerId,answers.engineerEmail,answers.engineerGitHub);
         engineers.push(newEngineer);
-        console.log(answers, "Entry saved")
+        console.log("Entry saved")
         employeeEntry()
     })
 
@@ -102,7 +102,7 @@ function internEntry() {
     .then((answers)=>{
         const newIntern = new Intern(answers.internName,answers.internId,answers.internEmail,answers.internSchool);
         interns.push(newIntern);
-        console.log(answers)
+        console.log("Entry Saved")
         employeeEntry()
     })
 }
@@ -144,24 +144,3 @@ function employeeEntry(){
 
 managerEntry()
 
-// require inquirer
-
-// Create an empty array list to store employee object
-
-// gather Manager data
-    // inquirer.prompt()
-    // THEN build a manager object
-
-    // Gather Engineer data
-    // inquirer.prompt()
-    // Then build an Engineer object
-    
-    // Gather Intern data
-    // inquirer.prompt()
-    // Then build an Intern object
-    
-    // ask which team to add or done
-    // inquirer.prompt()
-    // Then deciding which function the call
-    
-    // Generate the HTML and write it to a file

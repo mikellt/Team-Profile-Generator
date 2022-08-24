@@ -1,0 +1,23 @@
+#header {
+    background-color: rgba(255, 0, 0, 0.645);
+    color: white;
+    font-size: 5rem;
+    padding:1rem;
+    margin: 1rem;
+    display:flex;
+    justify-content: center;
+}
+
+main{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 5rem;
+    padding: 1rem;
+}
+
+.card{
+    padding: 10px;
+    margin: 20px;
+}
+
