@@ -16,13 +16,17 @@
 
   ## Usage
     Download files
-    run node
-    answer prompt questions
-    select entry types
-    once complete select end point
-    open new html file that was created
+    - 
+    Run node
+    Answer prompt questions
+    Select entry types
+    Once complete select end point
+    Open new html file that was created
+    
+![image](./utils/assets/img.JPG)
 
-    ![Deployed webpage](./utils/img/ch10-2.JPG)
+
+https://youtu.be/RiWLqwIeNLI
     
 
   ## Test
