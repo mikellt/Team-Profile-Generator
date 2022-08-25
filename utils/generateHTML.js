@@ -1,11 +1,7 @@
-
-
-
 const generateTeam = team => {
     const html= [];
     
     const generateManager = (manager) => {
-    // need to return HTML template literal with manager data
     let managerHtml = `
         <div class="card" style="width: 18rem;">
             <div class="card-body text-bg-danger">
@@ -30,7 +26,6 @@ const generateTeam = team => {
     }
     
     const generateEngineer = (engineer) => {
-        // need to return HTML template literal with manager date
         let engineerHtml = `
         <div class="card" style="width: 18rem;">
             <div class="card-body text-bg-primary">
@@ -56,7 +51,6 @@ const generateTeam = team => {
         html.push(engineerHtml);
     }
     const generateIntern = (intern) => {
-        // need to return HTML template literal with manager date
         let internHtml = `
         <div class="card" style="width: 18rem;">
             <div class="card-body text-bg-warning ">
@@ -93,7 +87,6 @@ const generateTeam = team => {
     return html.join('');
 }
 
-// module.exports = team => {
 const employeeType = (team) => {
     return`<!DOCTYPE html>
     <html lang="en">
